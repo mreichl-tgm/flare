@@ -1,0 +1,25 @@
+= Flask + ReST
+Markus Reichl <markus@re1.at>
+:imagesdir: ./imgs
+:toc-title: Inhaltsverzeichnis
+:toc:
+:figure-caption: Abbildung
+
+Eine Einführung in das Python Webframework Flask.
+
+== Vorbereitung
+=== Virtual Environment
+[source,bash]
+----
+virtualenv
+----
+
+=== PyCharm
+[#img-new]
+.Neues Projekt
+image::new-light.png[Neues Projekt]
+
+[bibliography]
+== Referenzen
+* [virtualenv] virtualenv. Installation. https://virtualenv.pypa.io/en/stable/installation/
+* [scotch-flask-rest] Scotch. Build a RESTful API with Flask. https://scotch.io/tutorials/build-a-restful-api-with-flask-the-tdd-way
