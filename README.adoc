@@ -17,6 +17,14 @@ virtualenv
 === PyCharm
 image::new-light.png[Neues Projekt, width=80%, align=center]
 
+----
+.
+├── app.py
+├── static
+├── templates
+└── venv
+----
+
 [bibliography]
 == Referenzen
 * [virtualenv] virtualenv. Installation. https://virtualenv.pypa.io/en/stable/installation/
