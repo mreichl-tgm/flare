@@ -1,9 +1,13 @@
-= Flask + ReST
-Markus Reichl <markus@re1.at>
 :imagesdir: ./imgs
 :toc-title: Inhaltsverzeichnis
 :toc:
 :figure-caption: Abbildung
+ifdef::env-github[]
+:toc-title!:
+endif::[]
+
+= Flask + ReST
+Markus Reichl <markus@re1.at>
 
 Eine Einführung in das Python Webframework Flask.
 
