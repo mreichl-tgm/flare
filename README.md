@@ -1,35 +1,27 @@
 Flask + ReST
 ============
-Markus Reichl <markus@re1.at>
-
-Eine Einführung in das Python Webframework Flask in Python 3.6.
-
 ## Vorbereitung
-Flask kann einfach über den Python Package Manager pip[1] installiert werden.
+Flask[1] kann einfach über pip[2] installiert und über die Methode `flask run` gestartet werden.
 
 ~~~ sh
-pip install Flask
+pip install flask 		# Installiere Flask
+export FLASK_APP=app.py 	# Setze die Hauptklasse der Applikation
+flask run 			# Starte die Applikation
 ~~~
 
 ### Erweitert
-##### Venv
-Für Projekte wie dieses empfiehlt es sich zu Beginn eine Virtuelle Arbeitsumgebung zu aufzusetzen. In Python wird zu dazu virtualenv[2] verwendet, welches die Möglichkeit bietet eine Python Umgebung isoliert zu erstellen.
+#### Venv
+Für Projekte wie dieses empfiehlt es sich zu Beginn eine isolierte Arbeitsumgebung aufzusetzen. In Python wird dazu virtualenv[3] verwendet.
 ~~~ sh
 pip install virtualenv 		# Installiere Virtualenv
-virtualenv venv 			# Erstellen
-source venv/bin/activate 	# Aktivieren¹
+virtualenv venv 		# Erstelle eine neue Umgebung
+source venv/bin/activate 	# Aktiviere die Umgebung
 ~~~
+Die Umgebung sollte, sobald die Arbeit beendet ist, über das Kommando `deactivate` wieder deaktiviert werden.
 
-¹ Die Umgebung sollte, sobald die Arbeit beendet ist, über das Kommando `deactivate` wieder deaktiviert werden.
-
-### Flask
-~~~ sh
-pip install Flask
-~~~
-
-### PyCharm
+#### PyCharm
 In PyCharm kann ein neues Flask Projekt einfach über den Reiter `File` → `New Project...` → `Flask` erstellt werden.
-![Neues Projekt](imgs/new-light.png)
+![Neues Projekt](img/new-light.png)
 
 ~~~
 .
@@ -39,6 +31,10 @@ In PyCharm kann ein neues Flask Projekt einfach über den Reiter `File` → `New
 `-- venv
 ~~~
 
+## Author
+Markus Reichl <markus@re1.at>
+
 ## Referenzen
-* [1] Python. Installing Python Modules. https://docs.python.org/3/installing/index.html
-* [2] Virtualenv. Installation. https://virtualenv.pypa.io/en/stable/installation
+- [1] Flask. http://flask.pocoo.org
+- [2] Python. Installing Python Modules. https://docs.python.org/3/installing/index.html
+- [3] Virtualenv. Installation. https://virtualenv.pypa.io/en/stable/installation
