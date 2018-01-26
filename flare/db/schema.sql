@@ -20,3 +20,4 @@ CREATE TABLE flame (
 
 INSERT INTO fire VALUES (0, 'python', 'Python', 'Let''s talk about Python!');
 INSERT INTO flame VALUES (0, 0, 1, 'I <3 python', 'Python really is a great language!');
+INSERT INTO flame VALUES (0, 0, 1, 'Monty Python', 'Always look on the bright side of life.');
