@@ -6,5 +6,13 @@
 <body>
 <h2>Welcome to {{ flame_title }}</h2>
 <p>{{ flame_content }}</p>
+<p>Fuel: {{ flame_fuel }}</p>
+
+<div>
+    <form action="{{ url_for('kindle_flame', fire_name=fire_name, flame_id=flame_id) }}" method="POST">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <input type="submit" value="Kindle!"/>
+    </form>
+</div>
 </body>
 </html>
