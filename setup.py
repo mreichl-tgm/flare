@@ -4,7 +4,7 @@ setup(
     name='flare',
     version='0.0.1',
     packages=['flare'],
-    install_requires=['flask'],
+    install_requires=['Flask', 'Flask-PyMongo'],
     url='https://github.com/re1/flare',
     license='',
     author='Markus Re1',

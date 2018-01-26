@@ -1,6 +1,7 @@
 class Config:
     DEBUG = False
     TESTING = False
+    MONGO_URI = 'mongodb://canis:ignis@ds113738.mlab.com:13738/flare'
 
 
 class Dev(Config):
