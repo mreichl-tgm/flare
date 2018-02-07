@@ -1,5 +1,8 @@
-from flask import Flask, render_template, url_for, redirect
+from bson.objectid import ObjectId
+from flask import Flask, render_template, url_for, redirect, request
 from flask_pymongo import PyMongo
+
+from forms import TitleContentForm
 
 # Create the flask application
 app = Flask(__name__)
@@ -19,7 +22,7 @@ def get_index():
     return render_template("index.html")
 
 
-@app.route("/<string:fire_name>")
+@app.route("/<string:fire_name>", methods=["GET", "POST"])
 def get_fire(fire_name):
     """
     Returns the contents of the given fire name
@@ -28,14 +31,31 @@ def get_fire(fire_name):
     :rtype: str
     :return: Rendered html page
     """
-    cursor = mongo.db.fire.find_one_or_404({"name": fire_name})
+    fire = mongo.db.fire.find_one_or_404({"name": fire_name})
+    flames = mongo.db.fire.find({"fire": fire_name})
+
+    form = TitleContentForm()
+    if form.validate_on_submit():
+        flame = {
+            "fire": fire_name,
+            "title": request.args["title"],
+            "content": request.args["name"],
+            "fuel": 1
+        }
+
+        flame_id = mongo.db.fire.insert_one(flame)
+
+        return redirect(url_for("get_flame", fire_name=fire_name, flame_id=))
 
     return render_template("fire.html",
-                           fire_title=cursor["title"],
-                           fire_description=cursor["description"])
+                           fire_name=fire_name,
+                           fire_title=fire["title"],
+                           fire_description=fire["description"],
+                           flames=flames,
+                           form=form)
 
 
-@app.route("/<string:fire_name>/<int:flame_id>")
+@app.route("/<string:fire_name>/<string:flame_id>")
 def get_flame(fire_name, flame_id):
     """
     Returns the contents of the given flame in the given fire
@@ -45,17 +65,37 @@ def get_flame(fire_name, flame_id):
     :rtype: str
     :return: Rendered html page
     """
-    cursor = mongo.db.fire.find_one_or_404({"id": flame_id, "fire": fire_name})
+    flame = mongo.db.fire.find_one_or_404({"_id": ObjectId(flame_id),
+                                           "fire": fire_name})
 
     return render_template("flame.html",
                            flame_id=flame_id,
                            fire_name=fire_name,
-                           flame_title=cursor["title"],
-                           flame_content=cursor["content"],
-                           flame_fuel=cursor["fuel"])
+                           flame_title=flame["title"],
+                           flame_content=flame["content"],
+                           flame_fuel=flame["fuel"])
 
 
-@app.route("/<string:fire_name>/<int:flame_id>", methods=['POST'])
+@app.route("/create", methods=["POST"])
+def create_fire():
+    """
+    Create a new fire if it does not already exist
+    :return: Redirect to fire name
+    """
+    fire = {
+        "name": request.args["name"],
+        "title": request.args["title"],
+        "description": request.args["description"],
+        "flames": []
+    }
+
+    if not mongo.db.fire.find_one("name"):
+        mongo.db.fire.insert_one(fire)
+
+    return redirect(url_for("get_fire", fire_name=fire["name"]))
+
+
+@app.route("/<string:fire_name>/<string:flame_id>", methods=["POST"])
 def kindle_flame(fire_name, flame_id):
     """
     Add fuel to a flame
@@ -65,7 +105,9 @@ def kindle_flame(fire_name, flame_id):
     :return: Redirects the user to the get_flame page
     """
     # Increase the fuel by one
-    mongo.db.fire.update_one({"id": flame_id, "fire": fire_name}, {"$inc": {"fuel": 1}})
+    mongo.db.fire.update_one({"_id": ObjectId(flame_id),
+                              "fire": fire_name},
+                             {"$inc": {"fuel": 1}})
     # Redirect to the original page
     return redirect(url_for("get_flame", fire_name=fire_name, flame_id=flame_id))
 

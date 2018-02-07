@@ -1,10 +1,26 @@
-<!doctype html>
-<html>
-<head>
-    <title>{{ fire_title }}</title>
-</head>
-<body>
+{% with title=fire_title %}
+    {% include "header.html" %}
+{% endwith %}
+
 <h2>Welcome to {{ fire_title }}</h2>
-<p>{{ fire_description }}</p>
-</body>
-</html>
+<div class="row">
+    <div class="col-lg-8">
+        <p>{{ fire_description }}</p>
+        <ul>
+            {% for flame in flames %}
+                <li><a href="{{ url_for("get_flame",
+                        fire_name=fire_name,
+                        flame_id=flame["_id"]) }}">{{ flame["title"] }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-lg-4">
+        <form action="{{ url_for('add_flame', fire_name=fire_name) }}" method="post">
+            <label><textarea required name="content">What is it all about?</textarea></label>
+            <label><input required type="text" title="title" name="title"/></label>
+            {{ form.csrf_token }}
+        </form>
+    </div>
+</div>
+
+{% include "footer.html" %}

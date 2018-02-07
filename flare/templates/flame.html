@@ -1,9 +1,7 @@
-<!doctype html>
-<html>
-<head>
-    <title>{{ fire_name }} | {{ flame_title }}</title>
-</head>
-<body>
+{% with title=fire_name +  "/" + flame_title %}
+    {% include "header.html" %}
+{% endwith %}
+
 <h2>Welcome to {{ flame_title }}</h2>
 <p>{{ flame_content }}</p>
 <p>Fuel: {{ flame_fuel }}</p>
@@ -14,5 +12,5 @@
         <input type="submit" value="Kindle!"/>
     </form>
 </div>
-</body>
-</html>
+
+{% include "footer.html" %}
