@@ -14,19 +14,19 @@
             {% endfor %}
         </ul>
     </div>
+
     <div class="col">
-        <form action="" method="post">
-            {{ form.csrf_token }}
+        <form action="{{ url_for("add_flame", fire_name=fire_name) }}" method="post">
             <div class="row form-group">
-                <div class="col">{{ form.title.label }}</div>
-                <div class="col">{{ form.title }}</div>
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text" class="form-control"/>
             </div>
             <div class="row form-group">
-                <div class="col">{{ form.content.label }}</div>
-                <div class="col">{{ form.content }}</div>
+                <label for="content">Content</label>
+                <textarea id="content" name="content" class="form-control" rows="5"></textarea>
             </div>
             <div class="row form-group">
-                {{ form.submit }}
+                <button type="submit" class="btn btn-primary mb-2">Add Flame!</button>
             </div>
         </form>
     </div>

@@ -31,37 +31,6 @@ In PyCharm kann ein neues Flask Projekt einfach über den Reiter `File` → `New
 `-- venv
 ~~~
 
-# Formulare
-Zur Interaktion mittels Formularen wird in Flask das [Flask-WTF] [4] Paket verwendet, welches eine Schnittstelle zum [WTForms] [5]  Paket bildet.
-
-Ein Formular wird nach seinen Eingabefeldern benannt. Unser Formular wird daher als `TitleContentForm` deklariert, da es die Eingabe eines Titels, sowie eines Textes ermöglichen soll.
-
-```python
-from flask_wtf import Form
-from wtforms import StringField, TextAreaField
-from wtforms.validators import DataRequired
-
-
-class TitleContentForm(Form):
-    title = StringField("Title", validators=[DataRequired()])
-    content = TextAreaField("Content", validators=[DataRequired()])
-```
-
-Nun muss das Formular an jene Funktion übergeben werden, welche zu dessen Darstellung bestimmt ist. In unserem Fall werden in der Methode `add_flame` folgende Zeilen hinzugefügt:
-
-~~~python
-form = TitleContentForm()
-if form.validate_on_submit():
-	return redirect(url_for("add_flame", fire_name=fire_name))
-~~~
-
-Beim Aufruf von `render_template` wird das Formular dann über `form=form` übergeben.
-~~~python
-render_template("fire.html",
-		# ...
-		form=form)
-~~~
-
 # Author
 Markus Reichl <markus@re1.at>
 
