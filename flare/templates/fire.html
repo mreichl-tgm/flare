@@ -8,9 +8,9 @@
         <p>{{ fire_description }}</p>
         <ul>
             {% for flame in flames %}
-                <li><a href="{{ url_for("get_flame",
-                        fire_name=fire_name,
-                        flame_id=flame["_id"]) }}">{{ flame["title"] }}</a></li>
+                <li><a href="{{ url_for("get_flame", fire_name=fire_name, flame_id=flame["_id"]) }}">
+                    {{ flame["title"] }}
+                </a></li>
             {% endfor %}
         </ul>
     </div>

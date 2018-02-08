@@ -1,5 +1,13 @@
 Flask + ReST
 ============
+
+* [Vorbereitung](#vorbereitung)
+	* [Erweitert](#erweitert)
+		* [Venv](#venv)
+		* [PyCharm](#pycharm)
+* [Author](#author)
+* [Referenzen](#referenzen)
+
 # Vorbereitung
 [Flask] [1] kann einfach über [pip] [2] installiert und über die Methode `flask run` gestartet werden.
 
@@ -38,11 +46,7 @@ Markus Reichl <markus@re1.at>
 - [1] Flask. http://flask.pocoo.org
 - [2] Python. Installing Python Modules. https://docs.python.org/3/installing/index.html
 - [3] Virtualenv. Installation. https://virtualenv.pypa.io/en/stable/installation
-- [4] Flask-WTF. https://flask-wtf.readthedocs.io/en/stable
-- [5] WTForms. https://wtforms.readthedocs.io/en/latest
 
 [flask]: http://flask.pocoo.org
 [pip]: https://docs.python.org/3/installing/index.html
 [virtualenv]: https://virtualenv.pypa.io/en/stable/installation
-[flask-wtf]: https://flask-wtf.readthedocs.io/en/stable
-[wtforms]: https://wtforms.readthedocs.io/en/latest

@@ -39,7 +39,7 @@ def add_fire():
 
 
 @app.route("/<string:fire_name>")
-def get_fire(fire_name):
+def get_fire(fire_name: str):
     """
     Returns the contents of the given fire name
 
@@ -70,7 +70,7 @@ def add_flame(fire_name):
 
 
 @app.route("/<string:fire_name>/<string:flame_id>")
-def get_flame(fire_name, flame_id):
+def get_flame(fire_name: str, flame_id: str):
     """
     Returns the contents of the given flame in the given fire
 
@@ -79,7 +79,7 @@ def get_flame(fire_name, flame_id):
     :rtype: str
     :return: Rendered html page
     """
-    flame = mongo.db.fire.find_one_or_404({"_id": ObjectId(flame_id), "fire": fire_name})
+    flame = mongo.db.fire.find_one_or_404({"_id": ObjectId(flame_id)})
 
     return render_template("flame.html",
                            flame_id=flame_id,
@@ -90,7 +90,7 @@ def get_flame(fire_name, flame_id):
 
 
 @app.route("/<string:fire_name>/<string:flame_id>", methods=["POST"])
-def kindle(fire_name, flame_id):
+def kindle(fire_name: str, flame_id: str):
     """
     Add fuel to a flame
 
@@ -99,9 +99,9 @@ def kindle(fire_name, flame_id):
     :return: Redirects the user to the get_flame page
     """
     # Increase the fuel by one
-    mongo.db.fire.update_one({"_id": flame_id, "fire": fire_name}, {"$inc": {"fuel": 1}})
-    # Redirect to the original page
-    return redirect(url_for("get_flame", fire_name=fire_name, flame_id=flame_id))
+    mongo.db.fire.update_one({"_id": ObjectId(flame_id)}, {"$inc": {"fuel": 1}})
+    # Redirect to original page
+    return redirect(request.path)
 
 
 if __name__ == '__main__':

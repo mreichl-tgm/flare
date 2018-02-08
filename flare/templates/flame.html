@@ -8,8 +8,7 @@
 
 <div>
     <form action="{{ url_for('kindle', fire_name=fire_name, flame_id=flame_id) }}" method="POST">
-        <input type="hidden" name="_method" value="DELETE"/>
-        <input type="submit" value="Kindle!"/>
+        <button type="submit" class="btn btn-primary mb-2">Kindle!</button>
     </form>
 </div>
 
