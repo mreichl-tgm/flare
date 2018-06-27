@@ -103,6 +103,8 @@ def kindle(fire_name: str, flame_id: str):
     # Redirect to original page
     return redirect(request.path)
 
+# TODO: Delete route for flames and fires
+
 
 if __name__ == '__main__':
     app.run()
